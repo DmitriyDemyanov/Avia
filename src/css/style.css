@@ -10,8 +10,16 @@
     align-items: center;
 }
 
+.align-items-start {
+    align-items: flex-start;
+}
+
 .justify-items-center {
     justify-items: center;
+}
+
+.justify-items-between {
+    justify-content: space-between;
 }
 
 .ml-auto {
@@ -127,10 +135,60 @@ button.datepicker-done {
     font-weight: bold;
 }
 
+.ticket-card .add-favorite {
+    margin-top: 10px;
+}
+
 .tickets-empty-res-msg {
     padding: 10px 15px;
     text-align: center;
     background: whitesmoke;
     font-weight: bold;
     font-size: 18px;
+}
+
+
+
+.favorites .dropdown-content {
+    width: 400px !important;
+    color: #000;
+}
+
+.favorites .favorite-item-airline-img {
+    max-width: 100px;
+    margin-right: 10px;
+}
+
+.favorites .favorite-item-info {
+    flex-grow: 1;
+    padding: 10px;
+    line-height: 1;
+    height: auto;
+}
+
+.favorites .favorite-item-info .material-icons {
+    line-height: 1;
+    height: auto;
+}
+
+.favorites .favorite-item-destination {
+    border-bottom: 1px dashed gray;
+    margin-bottom: 5px;
+}
+
+.favorites .ticket-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.favorites .ticket-additional-info {
+    font-size: 12px;
+}
+
+.favorites .ticket-time-departure {
+    font-size: 14px;
+}
+
+.favorites .delete-favorite {
+    margin-top: 10px;
 }

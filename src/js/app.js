@@ -1,4 +1,5 @@
 import locations from "./store/locations";
+import favorite from "./store/favoriteTickets";
 import "../css/style.css";
 import "./plugins";
 import formUI from "./views/form";
@@ -42,4 +43,5 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     onFormSubmit();
   });
+
 });
