@@ -92,6 +92,15 @@ class Locations {
         return this.airlines[code] ? this.airlines[code].logo : '';
     }
 
+    getTicketById(id) {
+        console.log(id);
+        console.log(this.lastSearch);
+        const ticket = this.lastSearch.find(el => {
+            return el.ticket_id === id;
+        })
+        return ticket;
+    }
+
    async fetchTickets(params) {
         const response = await this.api.prices(params);
         console.log(response);
@@ -101,6 +110,7 @@ class Locations {
    }
 
    serializeTickets(tickets) {
+        let id = 0;
         return Object.values(tickets).map(ticket => {
             return {
                 ...ticket,
@@ -109,7 +119,8 @@ class Locations {
                 airline_logo: this.getAirlinelogoByCode(ticket.airline),
                 airline_name: this.getAirlineNameByCode(ticket.airline),
                 departure_at: this.formatDate(ticket.departure_at,'dd MMM yyyy hh:mm'),
-                return_at: this.formatDate(ticket.return_at,'dd MMM yyyy hh:mm')
+                return_at: this.formatDate(ticket.return_at,'dd MMM yyyy hh:mm'),
+                ticket_id: ++id
             }
         })
    }
@@ -117,6 +128,10 @@ class Locations {
 } 
 
 const locations = new Locations(api, { formatDate });
+
+console.log([{age:5}, {age: 7}, {age: 9}].find(el => {
+    return el.age === 11;
+}))
 
 export default locations;
 
