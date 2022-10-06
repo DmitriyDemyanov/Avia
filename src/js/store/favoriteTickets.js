@@ -7,12 +7,12 @@ class FavoriteTickets {
         this.wrapper = document.querySelector(wrap);
         this.tickets = [];
 
-        this.container.addEventListener('click', e => this.onClickTicket(e));
-
-        
+        this.container.addEventListener('click', e => this.onAddFavorite(e));
+        this.wrapper.addEventListener('click', e => this.onRemoveFavorite(e))
+        this.loadFavorits();
     }
 
-    onClickTicket(e) {
+    onAddFavorite(e) {
         e.preventDefault();
         const target = e.target;
         if (target.classList.contains("add-favorite")) {
@@ -20,7 +20,21 @@ class FavoriteTickets {
             const ticket = locations.getTicketById(id);
             console.log(ticket);
             this.tickets.push(ticket);
-            this.wrapper.insertAdjacentHTML('afterbegin', this.renderTicket(ticket, currencyUI.getCurrencySymbol()));
+            this.saveFavorits(this.tickets);
+            this.wrapper.insertAdjacentHTML('afterbegin', this.renderTicket(ticket, currencyUI.getCurrencySymbol()));   
+        }
+
+        
+    }
+
+    onRemoveFavorite(e) {
+        e.preventDefault();
+        if (e.target.classList.contains('delete-favorite')) {
+            const id = +e.target.getAttribute("data-ticket-id");
+            const item = e.target.closest(".favorite-item");
+            item.remove();
+            this.tickets = this.tickets.filter(el => el.ticket_id !== id);
+            this.saveFavorits(this.tickets);
         }
     }
 
@@ -56,8 +70,31 @@ class FavoriteTickets {
         `
     }
 
+    saveFavorits(arr) {
+        const saveLocal = JSON.stringify(arr);
+        
+        localStorage.setItem('Dima', saveLocal);
+
+    }
+
+    loadFavorits() {
+        const favorites = JSON.parse(localStorage.getItem('Dima'));
+        if (favorites) {
+            let fragment = '';
+            favorites.forEach(el => {
+                console.log(el);
+            const element = this.renderTicket(el, currencyUI.getCurrencySymbol());
+            fragment += element;
+            });
+            this.wrapper.insertAdjacentHTML('afterbegin', fragment);
+            this.tickets = favorites;
+        }
+    }
+
     
 }
+
+
 
 const favorite = new FavoriteTickets('.tickets-sections', '.dropdown-content');
 
